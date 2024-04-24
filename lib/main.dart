@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:get/get.dart';
 import 'package:tiger_order/pages/home_page.dart';
 import 'package:tiger_order/pages/splash_page.dart';
+import 'package:tiger_order/services/state/menu_group_state.dart';
 
 void main() async {
-  // Get.put(AuthState(), permanent: true);
+  Get.put(MenuGroupState(), permanent: true);
   // Get.put(LoadingState(), permanent: true);
   // Get.put(FutureState(), permanent: true);
   // Get.put(FutureConfirmState(), permanent: true);
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       //theme: _buildTheme(),
       home: const SplashPage(),
       routes: {
-        '/home': (context) => HomePage(),
+        '/home': (context) => const HomePage(),
       },
     );
   }

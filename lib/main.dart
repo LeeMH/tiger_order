@@ -3,10 +3,11 @@ import 'package:get/get.dart';
 import 'package:tiger_order/pages/home_page.dart';
 import 'package:tiger_order/pages/splash_page.dart';
 import 'package:tiger_order/services/state/menu_group_state.dart';
+import 'package:tiger_order/services/state/menu_state.dart';
 
 void main() async {
   Get.put(MenuGroupState(), permanent: true);
-  // Get.put(LoadingState(), permanent: true);
+  Get.put(MenuState(), permanent: true);
   // Get.put(FutureState(), permanent: true);
   // Get.put(FutureConfirmState(), permanent: true);
   // Get.put(FutureOrderBookState(), permanent: true);

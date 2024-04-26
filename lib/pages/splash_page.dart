@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiger_order/services/menu_group_service.dart';
+import 'package:tiger_order/services/menu_service.dart';
+import 'package:tiger_order/services/state/menu_group_state.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -10,6 +12,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   MenuGroupService menuGroupService = MenuGroupService();
+  MenuService menuService = MenuService();
 
   @override
   void initState() {
@@ -19,6 +22,8 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> loadState(BuildContext context) async {
     await menuGroupService.loadMenuGroups(1, 1);
+    await menuService.loadMenu(1, 2);
+
     Navigator.of(context).pushReplacementNamed('/home');
   }
 

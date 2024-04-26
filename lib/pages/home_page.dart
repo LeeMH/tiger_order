@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
         leading: const Hero(
             tag: 'logo',
             child: Image(image: AssetImage('assets/images/logo.png'))),
-        title: const Text('TigerOrder'),
+        title: const Text('호랑이 피자'),
       ),
       backgroundColor: Colors.orange[100],
       body: Padding(
@@ -33,11 +33,13 @@ class HomePage extends StatelessWidget {
                   enlargeCenterPage: true,
                   enableInfiniteScroll: false,
                   onPageChanged: (index, reason) {
-                    print("그룹 변경됨. ${MenuState.to.menu.length}");
                     MenuGroupState.to.setSelected(index + 1);
                     MenuState.to.changeSelectedMenu(index + 1);
                   },
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               SingleChildScrollView(
                 child: Column(
@@ -83,29 +85,88 @@ class HomePage extends StatelessWidget {
   }
 
   List<Widget> buildMenuCards() {
-    print("들어옴..");
-    MenuState.to.selectedMenu.forEach((element) {
-      print(element.name.first.value);
-    });
     return MenuState.to.selectedMenu.map((e) => makeCard(e)).toList();
   }
 
   Widget makeCard(Menu menu) {
-    print(menu);
-    return Card(
-      child: ListTile(
-        leading: Image.asset(
-          "assets/images/${menu.imageUrls.first.split("/").reversed.first}",
-          width: 60,
-          height: 60,
-          fit: BoxFit.cover,
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10), // 모서리 둥그렇게
+        color: Colors.orange[300], // 내부 색상 노란색
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.all(5),
+              child: Image.asset(
+                "assets/images/${menu.imageUrls.first.split("/").reversed.first}", // 음식 이미지 경로
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Expanded(
+              flex: 6,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        menu.name.first.value,
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Spacer(),
+                      Text(Util.formatNumber(menu.price)),
+                      SizedBox(width: 5)
+                    ],
+                  ),
+                  Text(
+                    menu.shortDesc,
+                    overflow: TextOverflow.fade,
+                    style: const TextStyle(color: Colors.black87, fontSize: 13),
+                  ),
+                ],
+              )),
+        ],
+      ),
+    );
+  }
+}
+
+/*
+ListTile(
+        leading: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16.0),
+            child: Image.asset(
+              "assets/images/${menu.imageUrls.first.split("/").reversed.first}",
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
         title: Text(menu.name.first.value),
+        subtitle: Column(
+          children: [
+            Text(
+              menu.shortDesc,
+              style: TextStyle(fontSize: 10),
+            ),
+          ],
+        ),
         trailing: Text(Util.formatNumber(menu.price)),
         onTap: () {
           //
         },
       ),
-    );
-  }
-}
+      */

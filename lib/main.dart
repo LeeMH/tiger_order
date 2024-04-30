@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tiger_order/pages/home_page.dart';
+import 'package:tiger_order/config.dart';
+import 'package:tiger_order/pages/home_screen.dart';
 import 'package:tiger_order/pages/splash_page.dart';
-import 'package:tiger_order/services/state/menu_group_state.dart';
-import 'package:tiger_order/services/state/menu_state.dart';
+import 'package:tiger_order/services/state/group_state.dart';
 
 void main() async {
-  Get.put(MenuGroupState(), permanent: true);
-  Get.put(MenuState(), permanent: true);
+  Get.put(GroupState(), permanent: true);
   // Get.put(FutureState(), permanent: true);
   // Get.put(FutureConfirmState(), permanent: true);
   // Get.put(FutureOrderBookState(), permanent: true);
@@ -32,11 +31,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'TigerOrder',
-      //theme: _buildTheme(),
+      theme: _buildTheme(),
       home: const SplashPage(),
       routes: {
-        '/home': (context) => const HomePage(),
+        '/home': (context) => HomeScreen(),
       },
+    );
+  }
+
+  ThemeData _buildTheme() {
+    return ThemeData(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: Config.seedColor,
+      ),
+      useMaterial3: true,
     );
   }
 }
